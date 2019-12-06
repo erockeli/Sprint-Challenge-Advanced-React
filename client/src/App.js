@@ -24,11 +24,31 @@ class App extends React.Component() {
 
     return (
       <div className="App">
+
+        <Athletes players = {this.state.players}/>
         
       </div>
     );
   }
   
 }
+
+function Athletes (props) { 
+  const [darkMode, setDarkMode] = useDarkMode(false);
+ const toggleMode = e => {
+   e.preventDefault();
+   setDarkMode(!darkMode);
+ }
+ return (
+   <div>
+
+
+<button onClick={toggleMode}>Custom Hook</button>
+{props.players.map(player => (<div key={player.id}>{player.id} {player.name} {player.country} {player.searches}</div>))}
+
+   </div>
+ );
+}
+
 
 export default App;
