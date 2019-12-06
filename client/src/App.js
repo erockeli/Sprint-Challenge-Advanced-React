@@ -9,6 +9,12 @@ class App extends React.Component() {
     }
   }
 
+  componentDidMount() {
+    fetch('http://localhost:500/api/players')
+    .then(res=> res.json())
+    .then(data => this.setState({players: data}))
+  }
+
 
   render(){
 
