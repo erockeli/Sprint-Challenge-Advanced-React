@@ -1,26 +1,68 @@
 import React from 'react';
-import logo from './logo.svg';
+import useDarkMode from './Hooks/useDarkMode'
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      players: [],
+      
+    };
+
+    }
+
+    componentDidMount() {
+
+      fetch('http://localhost:5000/api/players')
+      .then(res => res.json())
+      .then(data => this.setState( {players: data} ));
+      }
+
+     
+
+
+      componentDidUpdate() {
+        console.log(this.state);  
+        }
+
+        render() {
+    
+ 
+          return (
+            <div className="App">
+            
+            <Athletes players= {this.state.players}  />
+            
+            </div>
+          );
+        }
+        }
+
+        function Athletes (props) { 
+          const [darkMode, setDarkMode] = useDarkMode(false);
+         const toggleMode = e => {
+           e.preventDefault();
+           setDarkMode(!darkMode);
+         }
+         return (
+           <div>
+       
+        
+        <button onClick={toggleMode}>Custom Hook</button>
+       {props.players.map(player => (<div className="card" key={player.id}><div className="inside">
+         <span>{player.id}</span> 
+          <span>{player.name}</span> 
+          <span>{player.country}</span>
+          <span>{player.searches}</span>
+       </div></div>))}
+        
+           </div>
+         );
+       }
+
+
+
 
 export default App;

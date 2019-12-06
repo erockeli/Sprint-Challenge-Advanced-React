@@ -7,3 +7,21 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+it('darkmode', () => {
+  let clicked = false;
+  const { getByText } = render(<App darkmode={() => clicked = true} />);
+  const toggleDark = getByText(/custom hook/i);
+fireEvent.click(toggleDark);
+expect(clicked).toBe(false);
+
+});
+
+it('darkmode', () => {
+  let clicked = true;
+  const { getByText } = render(<App darkmode={() => clicked = true} />);
+  const toggleDark = getByText(/custom hook/i);
+fireEvent.click(toggleDark);
+expect(clicked).toBe(true);
+
+});
