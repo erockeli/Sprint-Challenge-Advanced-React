@@ -18,8 +18,9 @@ class App extends React.Component {
       fetch('http://localhost:5000/api/players')
       .then(res => res.json())
       .then(data => this.setState( {players: data} ));
-
       }
+
+     
 
 
       componentDidUpdate() {
@@ -50,7 +51,12 @@ class App extends React.Component {
        
         
         <button onClick={toggleMode}>Custom Hook</button>
-       {props.players.map(player => (<div key={player.id}>{player.id} {player.name} {player.country} {player.searches}</div>))}
+       {props.players.map(player => (<div className="card" key={player.id}><div className="inside">
+         <span>{player.id}</span> 
+          <span>{player.name}</span> 
+          <span>{player.country}</span>
+          <span>{player.searches}</span>
+       </div></div>))}
         
            </div>
          );
