@@ -15,6 +15,10 @@ class App extends React.Component() {
     .then(data => this.setState({players: data}))
   }
 
+  componentDidUpdate() {
+    console.log(this.state);  
+    }
+
 
   render(){
 
